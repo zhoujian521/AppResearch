@@ -33,7 +33,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <TouchableOpacity onPress={()=>this._init()}>
           <View style={[styles.button, {marginTop: 80}]}>
-            <Text>init:'https://mainnet.infura.io'</Text>
+            <Text>init 【https://mainnet.infura.io】</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>this._getBalance()}>

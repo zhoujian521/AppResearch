@@ -27,6 +27,10 @@ async function getBalance({ account='' }){
     
 }
 
+/**
+ * 创建钱包
+ *
+ */
 async function newWallet(){
     try {
         const datas = await gethModule.newWallet();
