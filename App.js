@@ -20,21 +20,13 @@ export default class App extends Component {
   // 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
   // 0xb5538753F2641A83409D2786790b42aC857C5340
   _getBalance =()=>{
-    const params = {
-      context:'', 
-      account:'0x71c7656ec7ab88b098defb751b7401b5f6d8976f', 
-      number:5532993};
+    const params = { account:'0x71c7656ec7ab88b098defb751b7401b5f6d8976f' };
     GethModel.getBalance(params);
   }
 
   _newWallet =()=>{
     GethModel.newWallet();
   }
-
-
-
-
-
 
   render() {
     return (
@@ -55,16 +47,6 @@ export default class App extends Component {
             <Text>newAccount</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._findEvents()}>
-          <View style={styles.button}>
-            <Text>findEvents</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._findEventsPromise()}>
-          <View style={styles.button}>
-            <Text>findEventsPromise</Text>
-          </View>
-        </TouchableOpacity>
         <TouchableOpacity onPress={()=>this._doSomethingExpensive()}>
           <View style={styles.button}>
             <Text>doSomethingExpensive</Text>
@@ -74,18 +56,6 @@ export default class App extends Component {
     );
   }
 
-
-  _addEvent =()=>{
-    GethModel.addEvent();
-  }
-
-  _findEvents =()=>{
-    GethModel.findEvents();
-  }
-
-  _findEventsPromise =()=>{
-    GethModel.findEventsPromise();
-  }
 
   _doSomethingExpensive =()=>{
     GethModel.doSomethingExpensive();

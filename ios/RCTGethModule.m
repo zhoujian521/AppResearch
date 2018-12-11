@@ -22,20 +22,11 @@ static RCTGethModule *_instance = nil;
 
 @end
 
-@implementation RCTGethModule {
-  
-  RCTResponseSenderBlock _afterCallback;
-  RCTPromiseResolveBlock _resolveBlock;
-  RCTPromiseRejectBlock _rejectBlock;
-  
-}
+@implementation RCTGethModule
 
 RCT_EXPORT_MODULE();
 
 + (instancetype)sharedInstance:(NSString *)rawurl {
-  if (!rawurl || !rawurl.length) {
-    rawurl = @"https://mainnet.infura.io";
-  }
   __weak NSString *weakRawurl = rawurl;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -56,14 +47,14 @@ RCT_EXPORT_METHOD(init:(NSString *)rawurl) {
 }
 
 // 账户余额
-RCT_EXPORT_METHOD(getBalance:(NSString*)context account:(NSString *)account number:(int64_t)number resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(getBalance:(NSString *)account resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)reject) {
   _resolveBlock = resolver;
   _rejectBlock = reject;
-  GethContext *text = [[GethContext alloc] init];
+  GethContext *context = [[GethContext alloc] init];
   GethAddress *address = [[GethAddress alloc] initFromHex:account];
-  GethEthereumClient *ethClient = [RCTGethModule sharedInstance:@""].ethClient;
+  GethEthereumClient *ethClient = [RCTGethModule sharedInstance:nil].ethClient;
   NSError *err;
-  GethBigInt *bigInt = [ethClient getBalanceAt:text account:address number:-1 error:&err];
+  GethBigInt *bigInt = [ethClient getBalanceAt:context account:address number:-1 error:&err];
   
   if (!err) {
     _resolveBlock(@[[bigInt string]]);
@@ -96,42 +87,6 @@ RCT_REMAP_METHOD(newWallet, resolver:(RCTPromiseResolveBlock)resolver rejecter:(
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback) {
-  _afterCallback = callback;
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    NSArray *events = @[@"A", @"B"];
-    self->_afterCallback(@[[NSNull null], events]);
-  });
-}
 
 RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSenderBlock)callback) {
   NSLog(@"param => %@", param);

@@ -15,9 +15,9 @@ function init({rawurl=''}){
  *
  * @param {*} {context='', account='', number=''}
  */
-async function getBalance({context='', account='', number=''}){
+async function getBalance({ account='' }){
     try {
-        const datas = await gethModule.getBalance(context, account, number);
+        const datas = await gethModule.getBalance( account );
         console.log('==============getBalance======================');
         console.log(datas);
     } catch (error) {
@@ -40,52 +40,6 @@ async function newWallet(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function findEvents(){
-    gethModule.findEvents((error, events) => {
-        if (error) {
-          console.error(error);
-        } else {
-          console.log('====================================');
-          console.log(events);
-          console.log('====================================');
-        }
-      });
-}
-
 function doSomethingExpensive(){
     const param = '121212121212';
     gethModule.doSomethingExpensive(param ,(error, events) => {
@@ -107,7 +61,5 @@ export default {
     init,
     getBalance,
     newWallet,
-
-    findEvents,
     doSomethingExpensive
 };
