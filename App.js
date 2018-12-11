@@ -11,29 +11,48 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import GethModel from './utils/geth-utils';
 
 export default class App extends Component {
-
-  _addEvent =()=>{
-    GethModel.addEvent();
+  
+  _init =()=>{
+    const rawurl = 'https://mainnet.infura.io';
+    GethModel.init({rawurl});
   }
 
-  _findEvents =()=>{
-    GethModel.findEvents();
+  // 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
+  // 0xb5538753F2641A83409D2786790b42aC857C5340
+  _getBalance =()=>{
+    const params = {
+      context:'', 
+      account:'0x71c7656ec7ab88b098defb751b7401b5f6d8976f', 
+      number:5532993};
+    GethModel.getBalance(params);
   }
 
-  _findEventsPromise =()=>{
-    GethModel.findEventsPromise();
+  _newWallet =()=>{
+    GethModel.newWallet();
   }
 
-  _doSomethingExpensive =()=>{
-    GethModel.doSomethingExpensive();
-  }
+
+
+
+
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={()=>this._addEvent()}>
+        <TouchableOpacity onPress={()=>this._init()}>
           <View style={[styles.button, {marginTop: 80}]}>
-            <Text>addEvent</Text>
+            <Text>init:'https://mainnet.infura.io'</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._getBalance()}>
+          <View style={styles.button}>
+            <Text>getBalance</Text>
+          </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={()=>this._newWallet()}>
+          <View style={styles.button}>
+            <Text>newAccount</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>this._findEvents()}>
@@ -53,6 +72,23 @@ export default class App extends Component {
         </TouchableOpacity>
       </View>
     );
+  }
+
+
+  _addEvent =()=>{
+    GethModel.addEvent();
+  }
+
+  _findEvents =()=>{
+    GethModel.findEvents();
+  }
+
+  _findEventsPromise =()=>{
+    GethModel.findEventsPromise();
+  }
+
+  _doSomethingExpensive =()=>{
+    GethModel.doSomethingExpensive();
   }
 }
 
