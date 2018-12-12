@@ -23,6 +23,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		237F656221C0D868002D0227 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 237F656121C0D868002D0227 /* FileManager.m */; };
+		237F659421C0E34A002D0227 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = 237F659121C0E34A002D0227 /* Common */; };
+		237F659521C0E34A002D0227 /* Geth in Resources */ = {isa = PBXBuildFile; fileRef = 237F659221C0E34A002D0227 /* Geth */; };
+		237F659621C0E34A002D0227 /* Web3 in Resources */ = {isa = PBXBuildFile; fileRef = 237F659321C0E34A002D0227 /* Web3 */; };
 		23C034F021BE97AD0026E5E6 /* Geth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C034EF21BE97AD0026E5E6 /* Geth.framework */; };
 		23C034F721BF55DD0026E5E6 /* RCTGethModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C034F621BF55DD0026E5E6 /* RCTGethModule.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -338,6 +342,11 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AppResearch/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AppResearch/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		237F656021C0D868002D0227 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		237F656121C0D868002D0227 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
+		237F659121C0E34A002D0227 /* Common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Common; sourceTree = "<group>"; };
+		237F659221C0E34A002D0227 /* Geth */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Geth; sourceTree = "<group>"; };
+		237F659321C0E34A002D0227 /* Web3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web3; sourceTree = "<group>"; };
 		23C034EC21BE92890026E5E6 /* Geth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Geth.framework; path = AppResearch/Frameworks/Geth.framework; sourceTree = "<group>"; };
 		23C034EF21BE97AD0026E5E6 /* Geth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Geth.framework; sourceTree = "<group>"; };
 		23C034F521BF55DD0026E5E6 /* RCTGethModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTGethModule.h; sourceTree = "<group>"; };
@@ -488,9 +497,14 @@
 		13B07FAE1A68108700A75B9A /* AppResearch */ = {
 			isa = PBXGroup;
 			children = (
+				237F659121C0E34A002D0227 /* Common */,
+				237F659221C0E34A002D0227 /* Geth */,
+				237F659321C0E34A002D0227 /* Web3 */,
 				23C034EF21BE97AD0026E5E6 /* Geth.framework */,
 				23C034F521BF55DD0026E5E6 /* RCTGethModule.h */,
 				23C034F621BF55DD0026E5E6 /* RCTGethModule.m */,
+				237F656021C0D868002D0227 /* FileManager.h */,
+				237F656121C0D868002D0227 /* FileManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -705,6 +719,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = H9Y3FRUC6H;
+						LastSwiftMigration = 1010;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1062,8 +1077,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				237F659521C0E34A002D0227 /* Geth in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				237F659421C0E34A002D0227 /* Common in Resources */,
+				237F659621C0E34A002D0227 /* Web3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1149,7 @@
 				23C034F721BF55DD0026E5E6 /* RCTGethModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				237F656221C0D868002D0227 /* FileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1226,8 +1245,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H9Y3FRUC6H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1244,6 +1265,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.AppResearch;
 				PRODUCT_NAME = AppResearch;
+				SWIFT_OBJC_BRIDGING_HEADER = "AppResearch-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1252,7 +1276,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = H9Y3FRUC6H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1269,6 +1295,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.AppResearch;
 				PRODUCT_NAME = AppResearch;
+				SWIFT_OBJC_BRIDGING_HEADER = "AppResearch-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

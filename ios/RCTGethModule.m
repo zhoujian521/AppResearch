@@ -9,12 +9,17 @@
 #import "RCTGethModule.h"
 #import <React/RCTLog.h>
 #import <Geth/Geth.h>
+#import "FileManager.h"
+
+
 
 static RCTGethModule *_instance = nil;
 
 @interface RCTGethModule()
 
 @property(nonatomic, strong) GethEthereumClient *ethClient;
+
+@property(nonatomic, strong) NSString *keydir;
 
 @property(nonatomic, copy) RCTPromiseResolveBlock resolveBlock;
 @property(nonatomic, copy) RCTPromiseRejectBlock rejectBlock;
@@ -33,6 +38,12 @@ RCT_EXPORT_MODULE();
     if (_instance == nil) {
       _instance = [[self alloc] init];
       _instance.ethClient = [[GethEthereumClient alloc] init:weakRawurl];
+      NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+      NSString *keydir = [documentsPath stringByAppendingPathComponent:@"keystore"];
+      if (![FileManager fileExistsAtPath:keydir]) {
+        [FileManager createDirectoryIfNotExists:keydir];
+      }
+      _instance.keydir = keydir;
     }
   });
   return _instance;
@@ -45,6 +56,95 @@ RCT_EXPORT_METHOD(init:(NSString *)rawurl) {
   }
   [RCTGethModule sharedInstance:rawurl];
 }
+
+
+// 随机生成钱包
+RCT_EXPORT_METHOD(generateWallet) {
+  NSString *keydir = [RCTGethModule sharedInstance:nil].keydir;
+  NSError * err = [NSError errorWithDomain:@"generateWallet" code:-1 userInfo:nil];
+  GethAccount *wallet = [[[GethKeyStore alloc] init] newAccount:keydir error:&err];
+  
+  NSLog(@"err ==> %@",err);
+  NSLog(@"wallet ==> %@",wallet);
+}
+
+RCT_EXPORT_METHOD(createKeyStore) {
+  NSString *keydir = [RCTGethModule sharedInstance:nil].keydir;
+  GethKeyStore *keyStore = [[GethKeyStore alloc] init:keydir scryptN:GethStandardScryptN scryptP:GethStandardScryptP];
+  NSError *err = nil;
+  GethAccount *account = [keyStore newAccount:keydir error:&err];
+  GethAddress *address = [account getAddress];
+  NSString *addressHex = [address getHex];
+  NSLog(@"addressHex ==> %@",addressHex);
+}
+
+RCT_EXPORT_METHOD(importKeyStore:(NSData *)keyJSON passphrase:(NSString *)passphrase newPassphrase:(NSString *)newPassphrase) {
+  NSError *error = nil;
+  GethAccount *account = [[GethKeyStore alloc] importKey:keyJSON passphrase:passphrase newPassphrase:newPassphrase error:&error];
+  GethAddress *address = [account getAddress];
+  NSString *addressHex = [address getHex];
+  NSLog(@"addressHex ==> %@",addressHex);
+}
+
+RCT_EXPORT_METHOD(transferEth) {
+//  - (instancetype)init:(int64_t)nonce to:(GethAddress*)to amount:(GethBigInt*)amount gasLimit:(int64_t)gasLimit gasPrice:(GethBigInt*)gasPrice data:(NSData*)data;
+  
+  GethTransactOpts *transactOpts = [[GethTransactOpts alloc] init];
+  [transactOpts setNonce:1];
+  
+  NSString *metaMask = @"0x38bCc5B8b793F544d86a94bd2AE94196567b865c";
+  GethAddress *metaMaskAddress = [[GethAddress alloc] initFromHex:metaMask];
+  [transactOpts setFrom:metaMaskAddress];
+  
+  GethBigInt *amount = [[GethBigInt alloc] init:2];
+  [transactOpts setValue:amount];
+  
+  ino64_t gasLimit = 3;
+  [transactOpts setGasLimit:gasLimit];
+  
+  GethBigInt *gasPrice = [[GethBigInt alloc] init:4];
+  [transactOpts setGasPrice:gasPrice];
+  
+//  NSString *eth4fun = @"0xb5538753F2641A83409D2786790b42aC857C5340";
+//  GethAddress *eth4funAddress = [[GethAddress alloc] initFromHex:eth4fun];
+//  NSError *err = nil;
+//  GethSigner *signer = [[[GethSigner alloc] init] sign:eth4funAddress p1:<#(GethTransaction *)#> error:&err];
+//  NSLog(@"signer===>%@",signer);
+  
+  NSError *transferErr = nil;
+  GethTransaction *transfer = [[[GethBoundContract alloc] init] transfer:transactOpts error:&transferErr];
+  NSLog(@"transfer===>%@",transfer);
+}
+
+RCT_EXPORT_METHOD(transferTokens) {
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 账户余额
 RCT_EXPORT_METHOD(getBalance:(NSString *)account resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)reject) {

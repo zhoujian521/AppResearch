@@ -10,6 +10,23 @@ function init({rawurl=''}){
     gethModule.init(rawurl);
 }
 
+
+function generateWallet(){
+    gethModule.generateWallet();
+}
+
+function createKeyStore(){
+    gethModule.createKeyStore();
+}
+
+function importKeyStore(){
+    gethModule.importKeyStore();
+}
+
+
+
+
+
 /**
  * 账户余额
  *
@@ -24,8 +41,9 @@ async function getBalance({ account='' }){
         console.log('===============getBalance=====================');
         console.log(error);        
     }
-    
 }
+
+
 
 /**
  * 创建钱包
@@ -63,6 +81,11 @@ function doSomethingExpensive(){
 
 export default {
     init,
+    generateWallet,
+    createKeyStore,
+    importKeyStore,
+
+
     getBalance,
     newWallet,
     doSomethingExpensive

@@ -16,6 +16,20 @@ export default class App extends Component {
     const rawurl = 'https://mainnet.infura.io';
     GethModel.init({rawurl});
   }
+
+  _generateWallet =()=>{
+    GethModel.generateWallet();
+  }
+
+  _createKeyStore =()=>{
+    GethModel.createKeyStore();
+  }
+
+  _importKeyStore =()=>{
+    GethModel.importKeyStore();
+  }
+
+  
   
   // 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
   // 0xb5538753F2641A83409D2786790b42aC857C5340
@@ -26,6 +40,47 @@ export default class App extends Component {
 
   _newWallet =()=>{
     GethModel.newWallet();
+  }
+
+
+  render() {
+    const iOSGeth = <View>
+        <TouchableOpacity onPress={()=>this._init()}>
+          <Text style={[styles.button, {marginTop: 80}]}>init 【https://mainnet.infura.io】</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._generateWallet()}>
+          <Text style={styles.button}>generateWallet</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={()=>this._createKeyStore()}>
+          <Text style={styles.button}>createKeyStore</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._importKeyStore()}>
+          <Text style={styles.button}>importKeyStore</Text>
+        </TouchableOpacity>
+
+
+        
+        <TouchableOpacity onPress={()=>this._newWallet()}>
+          <Text style={styles.button}>newAccount</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._doSomethingExpensive()}>
+          <Text style={styles.button}>doSomethingExpensive</Text>
+        </TouchableOpacity>
+    </View>
+
+    return (
+      <View style={styles.container}>
+        {iOSGeth}
+        <TouchableOpacity onPress={()=>this._etherscanGetBalance()}>
+          <View style={styles.button}>
+            <Text>Etherscan=>GetBalance</Text>
+          </View>
+        </TouchableOpacity>
+
+
+      </View>
+    );
   }
 
 
@@ -46,47 +101,6 @@ export default class App extends Component {
     console.log('============txlist========================');
     console.log(txlist);
     console.log('============txlist========================');
-
-
-  }
-
-  render() {
-    const iOSGeth = <View>
-      <TouchableOpacity onPress={()=>this._init()}>
-          <View style={[styles.button, {marginTop: 80}]}>
-            <Text>init 【https://mainnet.infura.io】</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._getBalance()}>
-          <View style={styles.button}>
-            <Text>getBalance</Text>
-          </View>
-        </TouchableOpacity>
-        
-        <TouchableOpacity onPress={()=>this._newWallet()}>
-          <View style={styles.button}>
-            <Text>newAccount</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._doSomethingExpensive()}>
-          <View style={styles.button}>
-            <Text>doSomethingExpensive</Text>
-          </View>
-        </TouchableOpacity>
-    </View>
-
-    return (
-      <View style={styles.container}>
-        {iOSGeth}
-        <TouchableOpacity onPress={()=>this._etherscanGetBalance()}>
-          <View style={styles.button}>
-            <Text>Etherscan=>GetBalance</Text>
-          </View>
-        </TouchableOpacity>
-
-
-      </View>
-    );
   }
 
 
