@@ -87,62 +87,51 @@ RCT_EXPORT_METHOD(importKeyStore:(NSData *)keyJSON passphrase:(NSString *)passph
 }
 
 RCT_EXPORT_METHOD(transferEth) {
-//  - (instancetype)init:(int64_t)nonce to:(GethAddress*)to amount:(GethBigInt*)amount gasLimit:(int64_t)gasLimit gasPrice:(GethBigInt*)gasPrice data:(NSData*)data;
-  
-  GethTransactOpts *transactOpts = [[GethTransactOpts alloc] init];
-  [transactOpts setNonce:1];
-  
+  GethEthereumClient *ethClient = [RCTGethModule sharedInstance:nil].ethClient;
+  // TODO 1 参数如何构建&&传参
+  NSString *eth4fun = @"0xb5538753F2641A83409D2786790b42aC857C5340";
+  GethAddress *from = [[GethAddress alloc] initFromHex:eth4fun];
+  GethContext *context = [[GethContext alloc] init];
+  int64_t nonce = 0;
+  NSError *error = nil;
+  BOOL isGet = [ethClient getPendingNonceAt:context account:from nonce:&nonce error:&error];
+  if (!isGet) {
+    // TODO 2 获取 nonce 失败的逻辑
+    return;
+  }
+  NSLog(@"nonce ==> %lld", nonce);
+  // toWei 的转换逻辑
   NSString *metaMask = @"0x38bCc5B8b793F544d86a94bd2AE94196567b865c";
-  GethAddress *metaMaskAddress = [[GethAddress alloc] initFromHex:metaMask];
-  [transactOpts setFrom:metaMaskAddress];
+  GethAddress *to = [[GethAddress alloc] initFromHex:metaMask];
+  GethBigInt *amount = [[GethBigInt alloc] init:2]; // toWei
+  ino64_t gasLimit = 51000; // toWei
+  GethBigInt *gasPrice = [[GethBigInt alloc] init:10 * 1e9]; // toWei
+  NSData *data = [NSData data];
+  GethTransaction *transaction = [[GethTransaction alloc] init:nonce to:to amount:amount gasLimit:gasLimit gasPrice:gasPrice data:data];
   
-  GethBigInt *amount = [[GethBigInt alloc] init:2];
-  [transactOpts setValue:amount];
+//  - (GethTransaction*)signTx:(GethAccount*)account tx:(GethTransaction*)tx chainID:(GethBigInt*)chainID error:(NSError**)error;
+  // TODO 3 GethKeyStore 缓存机制
   
-  ino64_t gasLimit = 3;
-  [transactOpts setGasLimit:gasLimit];
+  // TODO 4 GethAccount GethAccounts 如何存取
+  GethAccounts *accounts = [[GethAccounts alloc] init];
+  NSError *accountsErr = nil;
+  GethAccount *account = [accounts get:0 error:&accountsErr];
   
-  GethBigInt *gasPrice = [[GethBigInt alloc] init:4];
-  [transactOpts setGasPrice:gasPrice];
+  GethKeyStore *keyStore = [[GethKeyStore alloc] initWithRef:0];
   
-//  NSString *eth4fun = @"0xb5538753F2641A83409D2786790b42aC857C5340";
-//  GethAddress *eth4funAddress = [[GethAddress alloc] initFromHex:eth4fun];
-//  NSError *err = nil;
-//  GethSigner *signer = [[[GethSigner alloc] init] sign:eth4funAddress p1:<#(GethTransaction *)#> error:&err];
-//  NSLog(@"signer===>%@",signer);
+  int64_t ethereumNetworkID = 0;
+  GethBigInt *chainID = [[GethBigInt alloc] init:ethereumNetworkID];
+  NSError *signedErr = nil;
+  GethTransaction *signedTx = [keyStore signTx:account tx:transaction chainID:chainID error:&signedErr];
   
-  NSError *transferErr = nil;
-  GethTransaction *transfer = [[[GethBoundContract alloc] init] transfer:transactOpts error:&transferErr];
-  NSLog(@"transfer===>%@",transfer);
+  NSError *sendErr = nil;
+  BOOL isSend = [ethClient sendTransaction:context tx:signedTx error:&sendErr];
+  NSLog(@"isSend ==> %d",isSend);
 }
 
 RCT_EXPORT_METHOD(transferTokens) {
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
