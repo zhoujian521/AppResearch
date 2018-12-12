@@ -29,6 +29,10 @@ export default class App extends Component {
     GethModel.importKeyStore();
   }
 
+  _transferEth =()=>{
+    GethModel.transferEth();
+  }
+
   
   
   // 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
@@ -51,12 +55,14 @@ export default class App extends Component {
         <TouchableOpacity onPress={()=>this._generateWallet()}>
           <Text style={styles.button}>generateWallet</Text>
         </TouchableOpacity>
-
         <TouchableOpacity onPress={()=>this._createKeyStore()}>
           <Text style={styles.button}>createKeyStore</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>this._importKeyStore()}>
           <Text style={styles.button}>importKeyStore</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._transferEth()}>
+          <Text style={styles.button}>transferEth</Text>
         </TouchableOpacity>
 
 

@@ -23,6 +23,10 @@ function importKeyStore(){
     gethModule.importKeyStore();
 }
 
+function transferEth(){
+    gethModule.transferEth();
+}
+
 
 
 
@@ -84,6 +88,7 @@ export default {
     generateWallet,
     createKeyStore,
     importKeyStore,
+    transferEth,
 
 
     getBalance,
