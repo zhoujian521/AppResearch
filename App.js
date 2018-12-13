@@ -14,6 +14,13 @@ var WebViewBridge = require('react-native-webview-bridge');
 
 
 export default class App extends Component {
+
+  componentDidMount=()=>{
+    const { webviewbridge } = this.refs;
+    console.log('=============webviewbridge=======================');
+    console.log(webviewbridge);
+    console.log('=============webviewbridge=======================');
+  }
   
   _init =()=>{
     const rawurl = 'ws://rinkeby03.milewan.com:8546';
@@ -57,6 +64,12 @@ export default class App extends Component {
       case "got the message inside webview":
         console.log("we have got a message from webview! yeah");
         break;
+      default:
+        console.log('============message========================');
+        console.log(message);
+        console.log('============message========================');
+        break;
+        
     }
   }
 
@@ -99,7 +112,6 @@ export default class App extends Component {
       </TouchableOpacity>
     </View>
     
-
     const injectScript = 
     `(function () {
             if (WebViewBridge) {
@@ -108,17 +120,19 @@ export default class App extends Component {
                   WebViewBridge.send("got the message inside webview");
                 }
               };
+              webviewbridge.send("Android shouldOverrideUrlLoading");
               WebViewBridge.send("hello from webview");
             }
       }());`;
 
     return (
       <View style={{flex:1}}>
-            <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
+        <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
           ref="webviewbridge"
-          onBridgeMessage={this.onBridgeMessage.bind(this)}
-          injectedJavaScript={injectScript}
           source={{uri: "https://google.com"}}
+          injectedJavaScript={injectScript}
+          onBridgeMessage={this.onBridgeMessage.bind(this)}
+          onMessage={this.onBridgeMessage.bind(this)}
           />
       </View>
     );
