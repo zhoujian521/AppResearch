@@ -140,30 +140,32 @@ RCT_EXPORT_METHOD(importKeyStore) {
 //value: "0xde0b6b3a7640000"
 
 RCT_EXPORT_METHOD(transferEth) {
-  GethEthereumClient *ethClient = [RCTGethModule sharedInstance:nil].ethClient;
-  // TODO 1 参数如何构建&&传参
+  // 交易参数
   NSString *eth4fun = @"0xb5538753F2641A83409D2786790b42aC857C5340";
+  NSString *toAddress = @"0x38bCc5B8b793F544d86a94bd2AE94196567b865c";
+  int64_t value = 0x000000000000001;
+  ino64_t gasLimit = 0xc738;
+  ino64_t price = 1e10;
+  // 签名密码
+  NSString *passphrase = @"11111111";
+  NSString *newPassphrase = @"11111111";
+  
+  
+  GethEthereumClient *ethClient = [RCTGethModule sharedInstance:nil].ethClient;
   GethAddress *from = [[GethAddress alloc] initFromHex:eth4fun];
-  NSLog(@"from is %@", [from getHex]);
+  
   GethContext *context = [[GethContext alloc] init];
-
   int64_t nonce = 0x0;
   int64_t number = -1;
-  NSError *error = nil;
-//  BOOL isGet = [ethClient getPendingNonceAt:context account:from nonce:&nonce error:&error];
-  BOOL isGet = [ethClient getNonceAt:context account:from number:number nonce:&nonce  error:&error];
-  if (!isGet) {
-    NSLog(@"生成 nonce 失败");
-    // TODO 2 获取 nonce 失败的逻辑
-  }  
-  // toWei 的转换逻辑
-  NSString *metaMask = @"0x38bCc5B8b793F544d86a94bd2AE94196567b865c";
-  GethAddress *to = [[GethAddress alloc] initFromHex:metaMask];
-//  GethBigInt *amount = [[GethBigInt alloc] init:0xde0b6b3a7640000]; // toWei
-  GethBigInt *amount = [[GethBigInt alloc] init:0x000000000000001]; // toWei
-  ino64_t gasLimit = 0xc738; // toWei
-  GethBigInt *gasPrice = [[GethBigInt alloc] init:1e10]; // toWei
-//  GethBigInt *gasPrice = [[GethBigInt alloc] init:0x000000001]; // toWei
+  NSError *nonceErr = nil;
+  BOOL isGet = [ethClient getNonceAt:context account:from number:number nonce:&nonce  error:&nonceErr];
+  if (!isGet || nonceErr) {
+    // TODO 001:抛出 nonceErr
+    return;
+  }
+  GethAddress *to = [[GethAddress alloc] initFromHex:toAddress];
+  GethBigInt *amount = [[GethBigInt alloc] init:value];
+  GethBigInt *gasPrice = [[GethBigInt alloc] init:price];
   NSData *data = [NSData data];
   GethTransaction *transaction = [[GethTransaction alloc] init:nonce to:to amount:amount gasLimit:gasLimit gasPrice:gasPrice data:data];
   
@@ -185,23 +187,33 @@ RCT_EXPORT_METHOD(transferEth) {
   //  NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   GethKeyStore *keyStore = [[GethKeyStore alloc] init:keydir scryptN:GethStandardScryptN scryptP:GethStandardScryptP];
   NSError *err = nil;
-  NSString *passphrase = @"11111111";
-  NSString *newPassphrase = @"11111111";
   GethAccount *account = [keyStore importKey:keyJSON passphrase:passphrase newPassphrase:newPassphrase error:&err];
-  NSLog(@"account ==> %@",[[account getAddress] getHex]);
-  
-  
-  
-  
-  int64_t ethereumNetworkID = 4;
-  GethBigInt *chainID = [[GethBigInt alloc] init:ethereumNetworkID];
+
+  int64_t chainId = 4;
+  GethBigInt *chainID = [[GethBigInt alloc] init:chainId];
   NSError *signedErr = nil;
-//  GethTransaction *signedTx = [keyStore signTx:account tx:transaction chainID:chainID error:&signedErr];
   GethTransaction *signedTx = [keyStore signTxPassphrase:account passphrase:passphrase tx:transaction chainID:chainID error:&signedErr];
-  
+  if (signedErr) {
+    // TODO 002:抛出 signedErr
+    return;
+  }
   NSError *sendErr = nil;
   BOOL isSend = [ethClient sendTransaction:context tx:signedTx error:&sendErr];
+  if (!isSend || sendErr) {
+    // TODO 003:抛出 sendErr
+    return;
+  }
   NSLog(@"isSend ==> %d",isSend);
+  NSError *progressErr = nil;
+  GethSyncProgress *progress = [ethClient syncProgress:context error:&progressErr];
+  if (!progress || progressErr) {
+    // TODO 004:抛出 progressErr progress=nil
+    // 扫描同步交易失败
+    [context withCancel];
+  } else {
+    
+    [context withCancel];
+  }
 }
 
 RCT_EXPORT_METHOD(transferTokens) {
