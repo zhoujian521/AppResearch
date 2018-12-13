@@ -27,6 +27,8 @@
 		237F659421C0E34A002D0227 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = 237F659121C0E34A002D0227 /* Common */; };
 		237F659521C0E34A002D0227 /* Geth in Resources */ = {isa = PBXBuildFile; fileRef = 237F659221C0E34A002D0227 /* Geth */; };
 		237F659621C0E34A002D0227 /* Web3 in Resources */ = {isa = PBXBuildFile; fileRef = 237F659321C0E34A002D0227 /* Web3 */; };
+		237F65B921C2291A002D0227 /* RNTWKWebViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 237F65B821C2291A002D0227 /* RNTWKWebViewManager.m */; };
+		237F65E621C23696002D0227 /* libReact-Native-Webview-Bridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 237F65E421C231EF002D0227 /* libReact-Native-Webview-Bridge.a */; };
 		23C034F021BE97AD0026E5E6 /* Geth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C034EF21BE97AD0026E5E6 /* Geth.framework */; };
 		23C034F721BF55DD0026E5E6 /* RCTGethModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C034F621BF55DD0026E5E6 /* RCTGethModule.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -109,6 +111,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		237F65E321C231EF002D0227 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237F65DF21C231EF002D0227 /* React-Native-Webview-Bridge.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4114DC4C1C187C3A003CD988;
+			remoteInfo = "React-Native-Webview-Bridge";
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -347,6 +356,9 @@
 		237F659121C0E34A002D0227 /* Common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Common; sourceTree = "<group>"; };
 		237F659221C0E34A002D0227 /* Geth */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Geth; sourceTree = "<group>"; };
 		237F659321C0E34A002D0227 /* Web3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web3; sourceTree = "<group>"; };
+		237F65B721C2291A002D0227 /* RNTWKWebViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTWKWebViewManager.h; sourceTree = "<group>"; };
+		237F65B821C2291A002D0227 /* RNTWKWebViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTWKWebViewManager.m; sourceTree = "<group>"; };
+		237F65DF21C231EF002D0227 /* React-Native-Webview-Bridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React-Native-Webview-Bridge.xcodeproj"; path = "../node_modules/react-native-webview-bridge/ios/React-Native-Webview-Bridge.xcodeproj"; sourceTree = "<group>"; };
 		23C034EC21BE92890026E5E6 /* Geth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Geth.framework; path = AppResearch/Frameworks/Geth.framework; sourceTree = "<group>"; };
 		23C034EF21BE97AD0026E5E6 /* Geth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Geth.framework; sourceTree = "<group>"; };
 		23C034F521BF55DD0026E5E6 /* RCTGethModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTGethModule.h; sourceTree = "<group>"; };
@@ -373,6 +385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				237F65E621C23696002D0227 /* libReact-Native-Webview-Bridge.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -505,6 +518,8 @@
 				23C034F621BF55DD0026E5E6 /* RCTGethModule.m */,
 				237F656021C0D868002D0227 /* FileManager.h */,
 				237F656121C0D868002D0227 /* FileManager.m */,
+				237F65B721C2291A002D0227 /* RNTWKWebViewManager.h */,
+				237F65B821C2291A002D0227 /* RNTWKWebViewManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -539,6 +554,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		237F65E021C231EF002D0227 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				237F65E421C231EF002D0227 /* libReact-Native-Webview-Bridge.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +592,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				237F65DF21C231EF002D0227 /* React-Native-Webview-Bridge.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -789,6 +813,10 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
+					ProductGroup = 237F65E021C231EF002D0227 /* Products */;
+					ProjectRef = 237F65DF21C231EF002D0227 /* React-Native-Webview-Bridge.xcodeproj */;
+				},
+				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
@@ -858,6 +886,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		237F65E421C231EF002D0227 /* libReact-Native-Webview-Bridge.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReact-Native-Webview-Bridge.a";
+			remoteRef = 237F65E321C231EF002D0227 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {
@@ -1149,6 +1184,7 @@
 				23C034F721BF55DD0026E5E6 /* RCTGethModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				237F65B921C2291A002D0227 /* RNTWKWebViewManager.m in Sources */,
 				237F656221C0D868002D0227 /* FileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

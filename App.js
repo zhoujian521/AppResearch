@@ -9,6 +9,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import GethModel from './utils/geth-utils';
+// import WebViewBridge from 'react-native-webview-bridge';
+var WebViewBridge = require('react-native-webview-bridge');
+
 
 export default class App extends Component {
   
@@ -45,6 +48,17 @@ export default class App extends Component {
     GethModel.newWallet();
   }
 
+  onBridgeMessage=(message)=>{
+    const { webviewbridge } = this.refs;
+    switch (message) {
+      case "hello from webview":
+        webviewbridge.sendToBridge("hello from react-native");
+        break;
+      case "got the message inside webview":
+        console.log("we have got a message from webview! yeah");
+        break;
+    }
+  }
 
   render() {
     const iOSGeth = <View>
@@ -77,20 +91,39 @@ export default class App extends Component {
           <Text style={styles.button}>doSomethingExpensive</Text>
         </TouchableOpacity>
     </View>
+    const etherscan = <View> 
+      <TouchableOpacity onPress={()=>this._etherscanGetBalance()}>
+        <View style={styles.button}>
+          <Text>Etherscan=>GetBalance</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+    
+
+    const injectScript = 
+    `(function () {
+            if (WebViewBridge) {
+              WebViewBridge.onMessage = function (message) {
+                if (message === "hello from react-native") {
+                  WebViewBridge.send("got the message inside webview");
+                }
+              };
+              WebViewBridge.send("hello from webview");
+            }
+      }());`;
 
     return (
-      <View style={styles.container}>
-        {iOSGeth}
-        <TouchableOpacity onPress={()=>this._etherscanGetBalance()}>
-          <View style={styles.button}>
-            <Text>Etherscan=>GetBalance</Text>
-          </View>
-        </TouchableOpacity>
-
-
+      <View style={{flex:1}}>
+            <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
+          ref="webviewbridge"
+          onBridgeMessage={this.onBridgeMessage.bind(this)}
+          injectedJavaScript={injectScript}
+          source={{uri: "https://google.com"}}
+          />
       </View>
     );
   }
+
 
 
   _etherscanGetBalance= async ()=>{
@@ -132,3 +165,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'cyan'
   }
 });
+
+// {iOSGeth}
+// {etherscan}
