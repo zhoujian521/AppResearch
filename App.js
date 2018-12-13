@@ -13,7 +13,7 @@ import GethModel from './utils/geth-utils';
 export default class App extends Component {
   
   _init =()=>{
-    const rawurl = 'https://mainnet.infura.io';
+    const rawurl = 'ws://rinkeby03.milewan.com:8546';
     GethModel.init({rawurl});
   }
 
@@ -34,7 +34,6 @@ export default class App extends Component {
   }
 
   
-  
   // 0x71c7656ec7ab88b098defb751b7401b5f6d8976f
   // 0xb5538753F2641A83409D2786790b42aC857C5340
   _getBalance =()=>{
@@ -52,6 +51,10 @@ export default class App extends Component {
         <TouchableOpacity onPress={()=>this._init()}>
           <Text style={[styles.button, {marginTop: 80}]}>init 【https://mainnet.infura.io】</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._getBalance()}>
+          <Text style={styles.button}>getBalance</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={()=>this._generateWallet()}>
           <Text style={styles.button}>generateWallet</Text>
         </TouchableOpacity>

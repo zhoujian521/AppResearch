@@ -49,6 +49,15 @@ RCT_EXPORT_MODULE();
         [FileManager createDirectoryIfNotExists:keydir];
       }
       _instance.keydir = keydir;
+
+      // TODO 1 参数如何构建&&传参
+//      NSString *eth4fun = @"0xb5538753F2641A83409D2786790b42aC857C5340";
+//      GethAddress *from = [[GethAddress alloc] initFromHex:eth4fun];
+//      NSLog(@"from is %@", [from getHex]);
+//      GethContext *context = [[GethContext alloc] init];
+//      NSError *error = nil;
+//      GethBigInt *bigInt = [_instance.ethClient getBalanceAt:context account:from number:-1 error:&error];
+//      NSLog(@"balance ==> %@", [bigInt string]);
     }
   });
   return _instance;
@@ -135,23 +144,26 @@ RCT_EXPORT_METHOD(transferEth) {
   // TODO 1 参数如何构建&&传参
   NSString *eth4fun = @"0xb5538753F2641A83409D2786790b42aC857C5340";
   GethAddress *from = [[GethAddress alloc] initFromHex:eth4fun];
+  NSLog(@"from is %@", [from getHex]);
   GethContext *context = [[GethContext alloc] init];
+
   int64_t nonce = 0x0;
+  int64_t number = -1;
   NSError *error = nil;
-  BOOL isGet = [ethClient getPendingNonceAt:context account:from nonce:&nonce error:&error];
+//  BOOL isGet = [ethClient getPendingNonceAt:context account:from nonce:&nonce error:&error];
+  BOOL isGet = [ethClient getNonceAt:context account:from number:number nonce:&nonce  error:&error];
   if (!isGet) {
     NSLog(@"生成 nonce 失败");
     // TODO 2 获取 nonce 失败的逻辑
-  }
-  NSLog(@"nonce ==> %lld", nonce);
+  }  
   // toWei 的转换逻辑
   NSString *metaMask = @"0x38bCc5B8b793F544d86a94bd2AE94196567b865c";
   GethAddress *to = [[GethAddress alloc] initFromHex:metaMask];
 //  GethBigInt *amount = [[GethBigInt alloc] init:0xde0b6b3a7640000]; // toWei
-  GethBigInt *amount = [[GethBigInt alloc] init:0x000000000000000]; // toWei
+  GethBigInt *amount = [[GethBigInt alloc] init:0x000000000000001]; // toWei
   ino64_t gasLimit = 0xc738; // toWei
-//  GethBigInt *gasPrice = [[GethBigInt alloc] init:0x2540be400]; // toWei
-  GethBigInt *gasPrice = [[GethBigInt alloc] init:0x000000000]; // toWei
+  GethBigInt *gasPrice = [[GethBigInt alloc] init:1e10]; // toWei
+//  GethBigInt *gasPrice = [[GethBigInt alloc] init:0x000000001]; // toWei
   NSData *data = [NSData data];
   GethTransaction *transaction = [[GethTransaction alloc] init:nonce to:to amount:amount gasLimit:gasLimit gasPrice:gasPrice data:data];
   
@@ -176,9 +188,12 @@ RCT_EXPORT_METHOD(transferEth) {
   NSString *passphrase = @"11111111";
   NSString *newPassphrase = @"11111111";
   GethAccount *account = [keyStore importKey:keyJSON passphrase:passphrase newPassphrase:newPassphrase error:&err];
+  NSLog(@"account ==> %@",[[account getAddress] getHex]);
   
   
-  int64_t ethereumNetworkID = 0;
+  
+  
+  int64_t ethereumNetworkID = 4;
   GethBigInt *chainID = [[GethBigInt alloc] init:ethereumNetworkID];
   NSError *signedErr = nil;
 //  GethTransaction *signedTx = [keyStore signTx:account tx:transaction chainID:chainID error:&signedErr];
@@ -194,22 +209,6 @@ RCT_EXPORT_METHOD(transferTokens) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 账户余额
 RCT_EXPORT_METHOD(getBalance:(NSString *)account resolver:(RCTPromiseResolveBlock)resolver rejecter:(RCTPromiseRejectBlock)reject) {
   _resolveBlock = resolver;
@@ -219,7 +218,7 @@ RCT_EXPORT_METHOD(getBalance:(NSString *)account resolver:(RCTPromiseResolveBloc
   GethEthereumClient *ethClient = [RCTGethModule sharedInstance:nil].ethClient;
   NSError *err;
   GethBigInt *bigInt = [ethClient getBalanceAt:context account:address number:-1 error:&err];
-  
+  NSLog(@"balance ==> %@", [bigInt string]);
   if (!err) {
     _resolveBlock(@[[bigInt string]]);
   } else {
