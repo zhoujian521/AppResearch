@@ -9,8 +9,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import GethModel from './utils/geth-utils';
-// import WebViewBridge from 'react-native-webview-bridge';
-var WebViewBridge = require('react-native-webview-bridge');
+import ZJWebView from './nativeComponent/ZJWebView';
+
 
 
 export default class App extends Component {
@@ -74,67 +74,71 @@ export default class App extends Component {
   }
 
   render() {
-    const iOSGeth = <View>
-        <TouchableOpacity onPress={()=>this._init()}>
-          <Text style={[styles.button, {marginTop: 80}]}>init 【https://mainnet.infura.io】</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._getBalance()}>
-          <Text style={styles.button}>getBalance</Text>
-        </TouchableOpacity>
+    // const iOSGeth = <View>
+    //     <TouchableOpacity onPress={()=>this._init()}>
+    //       <Text style={[styles.button, {marginTop: 80}]}>init 【https://mainnet.infura.io】</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity onPress={()=>this._getBalance()}>
+    //       <Text style={styles.button}>getBalance</Text>
+    //     </TouchableOpacity>
 
-        <TouchableOpacity onPress={()=>this._generateWallet()}>
-          <Text style={styles.button}>generateWallet</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._createKeyStore()}>
-          <Text style={styles.button}>createKeyStore</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._importKeyStore()}>
-          <Text style={styles.button}>importKeyStore</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._transferEth()}>
-          <Text style={styles.button}>transferEth</Text>
-        </TouchableOpacity>
+    //     <TouchableOpacity onPress={()=>this._generateWallet()}>
+    //       <Text style={styles.button}>generateWallet</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity onPress={()=>this._createKeyStore()}>
+    //       <Text style={styles.button}>createKeyStore</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity onPress={()=>this._importKeyStore()}>
+    //       <Text style={styles.button}>importKeyStore</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity onPress={()=>this._transferEth()}>
+    //       <Text style={styles.button}>transferEth</Text>
+    //     </TouchableOpacity>
 
 
         
-        <TouchableOpacity onPress={()=>this._newWallet()}>
-          <Text style={styles.button}>newAccount</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this._doSomethingExpensive()}>
-          <Text style={styles.button}>doSomethingExpensive</Text>
-        </TouchableOpacity>
-    </View>
-    const etherscan = <View> 
-      <TouchableOpacity onPress={()=>this._etherscanGetBalance()}>
-        <View style={styles.button}>
-          <Text>Etherscan=>GetBalance</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+    //     <TouchableOpacity onPress={()=>this._newWallet()}>
+    //       <Text style={styles.button}>newAccount</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity onPress={()=>this._doSomethingExpensive()}>
+    //       <Text style={styles.button}>doSomethingExpensive</Text>
+    //     </TouchableOpacity>
+    // </View>
+
+
+    // const etherscan = <View> 
+    //   <TouchableOpacity onPress={()=>this._etherscanGetBalance()}>
+    //     <View style={styles.button}>
+    //       <Text>Etherscan=>GetBalance</Text>
+    //     </View>
+    //   </TouchableOpacity>
+    // </View>
     
-    const injectScript = 
-    `(function () {
-            if (WebViewBridge) {
-              WebViewBridge.onMessage = function (message) {
-                if (message === "hello from react-native") {
-                  WebViewBridge.send("got the message inside webview");
-                }
-              };
-              webviewbridge.send("Android shouldOverrideUrlLoading");
-              WebViewBridge.send("hello from webview");
-            }
-      }());`;
+    // const injectScript = 
+    // `(function () {
+    //         if (WebViewBridge) {
+    //           WebViewBridge.onMessage = function (message) {
+    //             if (message === "hello from react-native") {
+    //               WebViewBridge.send("got the message inside webview");
+    //             }
+    //           };
+    //           webviewbridge.send("Android shouldOverrideUrlLoading");
+    //           WebViewBridge.send("hello from webview");
+    //         }
+    //   }());`;
+
+    //   <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
+    //   ref="webviewbridge"
+    //   source={{uri: "https://google.com"}}
+    //   injectedJavaScript={injectScript}
+    //   onBridgeMessage={this.onBridgeMessage.bind(this)}
+    //   onMessage={this.onBridgeMessage.bind(this)}
+    //   />
 
     return (
-      <View style={{flex:1}}>
-        <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
-          ref="webviewbridge"
-          source={{uri: "https://google.com"}}
-          injectedJavaScript={injectScript}
-          onBridgeMessage={this.onBridgeMessage.bind(this)}
-          onMessage={this.onBridgeMessage.bind(this)}
-          />
-      </View>
+      <ZJWebView 
+      styles={{width:100, height:100, backgroundColor:'red'}} 
+      source={{uri: 'https://github.com/facebook/react-native'}}/>
     );
   }
 

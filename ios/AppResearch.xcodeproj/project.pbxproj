@@ -23,11 +23,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		2301385621C34AFF0099E1BE /* RCTZJWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2301385521C34AFF0099E1BE /* RCTZJWebView.m */; };
+		2301385921C34B330099E1BE /* RCTZJWebViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2301385821C34B330099E1BE /* RCTZJWebViewManager.m */; };
 		237F656221C0D868002D0227 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 237F656121C0D868002D0227 /* FileManager.m */; };
 		237F659421C0E34A002D0227 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = 237F659121C0E34A002D0227 /* Common */; };
 		237F659521C0E34A002D0227 /* Geth in Resources */ = {isa = PBXBuildFile; fileRef = 237F659221C0E34A002D0227 /* Geth */; };
 		237F659621C0E34A002D0227 /* Web3 in Resources */ = {isa = PBXBuildFile; fileRef = 237F659321C0E34A002D0227 /* Web3 */; };
-		237F65B921C2291A002D0227 /* RNTWKWebViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 237F65B821C2291A002D0227 /* RNTWKWebViewManager.m */; };
 		237F65E621C23696002D0227 /* libReact-Native-Webview-Bridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 237F65E421C231EF002D0227 /* libReact-Native-Webview-Bridge.a */; };
 		23C034F021BE97AD0026E5E6 /* Geth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C034EF21BE97AD0026E5E6 /* Geth.framework */; };
 		23C034F721BF55DD0026E5E6 /* RCTGethModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C034F621BF55DD0026E5E6 /* RCTGethModule.m */; };
@@ -351,13 +352,15 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AppResearch/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AppResearch/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		2301385421C34AFF0099E1BE /* RCTZJWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTZJWebView.h; sourceTree = "<group>"; };
+		2301385521C34AFF0099E1BE /* RCTZJWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTZJWebView.m; sourceTree = "<group>"; };
+		2301385721C34B330099E1BE /* RCTZJWebViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTZJWebViewManager.h; sourceTree = "<group>"; };
+		2301385821C34B330099E1BE /* RCTZJWebViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTZJWebViewManager.m; sourceTree = "<group>"; };
 		237F656021C0D868002D0227 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		237F656121C0D868002D0227 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		237F659121C0E34A002D0227 /* Common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Common; sourceTree = "<group>"; };
 		237F659221C0E34A002D0227 /* Geth */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Geth; sourceTree = "<group>"; };
 		237F659321C0E34A002D0227 /* Web3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web3; sourceTree = "<group>"; };
-		237F65B721C2291A002D0227 /* RNTWKWebViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTWKWebViewManager.h; sourceTree = "<group>"; };
-		237F65B821C2291A002D0227 /* RNTWKWebViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTWKWebViewManager.m; sourceTree = "<group>"; };
 		237F65DF21C231EF002D0227 /* React-Native-Webview-Bridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React-Native-Webview-Bridge.xcodeproj"; path = "../node_modules/react-native-webview-bridge/ios/React-Native-Webview-Bridge.xcodeproj"; sourceTree = "<group>"; };
 		23C034EC21BE92890026E5E6 /* Geth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Geth.framework; path = AppResearch/Frameworks/Geth.framework; sourceTree = "<group>"; };
 		23C034EF21BE97AD0026E5E6 /* Geth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Geth.framework; sourceTree = "<group>"; };
@@ -515,11 +518,13 @@
 				237F659321C0E34A002D0227 /* Web3 */,
 				23C034EF21BE97AD0026E5E6 /* Geth.framework */,
 				23C034F521BF55DD0026E5E6 /* RCTGethModule.h */,
+				2301385421C34AFF0099E1BE /* RCTZJWebView.h */,
+				2301385521C34AFF0099E1BE /* RCTZJWebView.m */,
+				2301385721C34B330099E1BE /* RCTZJWebViewManager.h */,
+				2301385821C34B330099E1BE /* RCTZJWebViewManager.m */,
 				23C034F621BF55DD0026E5E6 /* RCTGethModule.m */,
 				237F656021C0D868002D0227 /* FileManager.h */,
 				237F656121C0D868002D0227 /* FileManager.m */,
-				237F65B721C2291A002D0227 /* RNTWKWebViewManager.h */,
-				237F65B821C2291A002D0227 /* RNTWKWebViewManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1183,9 +1188,10 @@
 			files = (
 				23C034F721BF55DD0026E5E6 /* RCTGethModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				2301385621C34AFF0099E1BE /* RCTZJWebView.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				237F65B921C2291A002D0227 /* RNTWKWebViewManager.m in Sources */,
 				237F656221C0D868002D0227 /* FileManager.m in Sources */,
+				2301385921C34B330099E1BE /* RCTZJWebViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
