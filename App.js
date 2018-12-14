@@ -17,10 +17,7 @@ import WebViewBridge from 'react-native-webview-bridge';
 export default class App extends Component {
 
   componentDidMount=()=>{
-    const { webviewbridge } = this.refs;
-    // console.log('=============webviewbridge=======================');
-    // console.log(webviewbridge);
-    // console.log('=============webviewbridge=======================');
+    const { webviewbridge, zjWebView } = this.refs;
   }
   
   _init =()=>{
@@ -137,9 +134,9 @@ export default class App extends Component {
       //   onMessage={this.onBridgeMessage.bind(this)}/> 
 
       const webView = <ZJWebView 
+        ref="zjWebView"
         style={{ backgroundColor:'cyan', flex: 1}} 
-        source={{uri: 'https://google.com'}}
-        />
+        source={{uri: 'https://google.com'}}/>
 
     return (
       <View style={{ backgroundColor:'', flex: 1 }}>

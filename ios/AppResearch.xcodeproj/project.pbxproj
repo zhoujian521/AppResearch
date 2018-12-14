@@ -25,6 +25,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2301385621C34AFF0099E1BE /* RCTZJWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2301385521C34AFF0099E1BE /* RCTZJWebView.m */; };
 		2301385921C34B330099E1BE /* RCTZJWebViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2301385821C34B330099E1BE /* RCTZJWebViewManager.m */; };
+		231A00CF21C36C620044D449 /* Layer2.m in Sources */ = {isa = PBXBuildFile; fileRef = 231A00CE21C36C620044D449 /* Layer2.m */; };
 		237F656221C0D868002D0227 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 237F656121C0D868002D0227 /* FileManager.m */; };
 		237F659421C0E34A002D0227 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = 237F659121C0E34A002D0227 /* Common */; };
 		237F659521C0E34A002D0227 /* Geth in Resources */ = {isa = PBXBuildFile; fileRef = 237F659221C0E34A002D0227 /* Geth */; };
@@ -356,6 +357,8 @@
 		2301385521C34AFF0099E1BE /* RCTZJWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTZJWebView.m; sourceTree = "<group>"; };
 		2301385721C34B330099E1BE /* RCTZJWebViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTZJWebViewManager.h; sourceTree = "<group>"; };
 		2301385821C34B330099E1BE /* RCTZJWebViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTZJWebViewManager.m; sourceTree = "<group>"; };
+		231A00CD21C36C620044D449 /* Layer2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layer2.h; sourceTree = "<group>"; };
+		231A00CE21C36C620044D449 /* Layer2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Layer2.m; sourceTree = "<group>"; };
 		237F656021C0D868002D0227 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		237F656121C0D868002D0227 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		237F659121C0E34A002D0227 /* Common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Common; sourceTree = "<group>"; };
@@ -518,6 +521,8 @@
 				237F659321C0E34A002D0227 /* Web3 */,
 				23C034EF21BE97AD0026E5E6 /* Geth.framework */,
 				23C034F521BF55DD0026E5E6 /* RCTGethModule.h */,
+				231A00CD21C36C620044D449 /* Layer2.h */,
+				231A00CE21C36C620044D449 /* Layer2.m */,
 				2301385421C34AFF0099E1BE /* RCTZJWebView.h */,
 				2301385521C34AFF0099E1BE /* RCTZJWebView.m */,
 				2301385721C34B330099E1BE /* RCTZJWebViewManager.h */,
@@ -1192,6 +1197,7 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				237F656221C0D868002D0227 /* FileManager.m in Sources */,
 				2301385921C34B330099E1BE /* RCTZJWebViewManager.m in Sources */,
+				231A00CF21C36C620044D449 /* Layer2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

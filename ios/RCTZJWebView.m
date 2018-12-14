@@ -61,6 +61,7 @@ static NSURLCredential* clientAuthenticationCredential;
     _scrollEnabled = YES;
     _automaticallyAdjustContentInsets = YES;
     _contentInset = UIEdgeInsetsZero;
+    self.layer2 = [[Layer2 alloc] init];
   }
   return self;
 }
@@ -438,5 +439,42 @@ static NSURLCredential* clientAuthenticationCredential;
   _bounces = bounces;
   _webView.scrollView.bounces = bounces;
 }
+
+- (void)setLayer2:(Layer2 *)layer2{
+  if (_layer2) return;
+  
+  JSContext *context = [[JSContext alloc] init];
+  context.exceptionHandler = ^(JSContext *con, JSValue *exception) {
+    NSLog(@"%@", exception);
+    con.exception = exception;
+  };
+  
+  context[@"log"] = ^() {
+    NSArray *args = [JSContext currentArguments];
+    for (id obj in args) {
+      NSLog(@"%@",obj);
+    }
+  };
+  
+  _layer2 = layer2;
+  context[@"layer2"] = layer2;
+  layer2.firstName = @"LITEX";
+  layer2.lastName = @"ZJ";
+  layer2.urls = @{@"site": @"http://site.baidu.com"};
+  
+  
+  [context evaluateScript:@"log(layer2.fullName());"];
+  [context evaluateScript:@"log(layer2.firstName);"];
+  [context evaluateScript:@"log('site:', layer2.urls.site, 'blog:', layer2.urls.blog);"];
+  [context evaluateScript:@"layer2.urls = {blog:'http://blog.baidu.com'}"];
+  [context evaluateScript:@"log('-------AFTER CHANGE URLS-------')"];
+  [context evaluateScript:@"log('site:', layer2.urls.site, 'blog:', layer2.urls.blog);"];
+  
+  [context evaluateScript:@"log('methodCalledInJs:', layer2.methodCalledInJs());"];
+  [context evaluateScript:@"log('doFooWithBar:', layer2.doFooWithBar(1111111, 2222222));"];
+  [context evaluateScript:@"log('doFooWithBar:', layer2.doFoo(1111111, 2222222));"];
+}
+
+
 
 @end
