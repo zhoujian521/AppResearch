@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, WebView} from 'react-native';
 import GethModel from './utils/geth-utils';
 import ZJWebView from './nativeComponent/ZJWebView';
 import WebViewBridge from 'react-native-webview-bridge';
@@ -125,22 +125,25 @@ export default class App extends Component {
             }
       }());`;
 
-
       // <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
-      //   ref="webviewbridge"
-      //   source={{uri: "https://google.com"}}
-      //   injectedJavaScript={injectScript}
-      //   onBridgeMessage={this.onBridgeMessage.bind(this)}
-      //   onMessage={this.onBridgeMessage.bind(this)}/> 
+      // ref="webviewbridge"
+      // source={{uri: "https://google.com"}}
+      // injectedJavaScript={injectScript}
+      // onBridgeMessage={this.onBridgeMessage.bind(this)}
+      // onMessage={this.onBridgeMessage.bind(this)}/> 
+      
 
       const webView = <ZJWebView 
         ref="zjWebView"
         style={{ backgroundColor:'cyan', flex: 1}} 
-        source={{uri: 'https://google.com'}}/>
+        source={{uri: 'https://baidu.com'}}/>
+      const rnWebView = <WebView ref="webview"
+        style={{ backgroundColor:'cyan', flex: 1}} 
+        source={{uri: 'https://baidu.com'}}/>
 
     return (
-      <View style={{ backgroundColor:'', flex: 1 }}>
-        {webView}
+      <View style={{ backgroundColor:'red', flex: 1 }}>
+      {rnWebView}
       </View>
     );
   }
