@@ -9,6 +9,8 @@
 #import "RCTZJWebView.h"
 #import <React/RCTConvert.h>
 #import <React/RCTAutoInsetsProtocol.h>
+#import "RealLayer2Protocol.h"
+#import "objc/runtime.h"
 
 static NSString *const MessageHanderName = @"ReactNative";
 static NSURLCredential* clientAuthenticationCredential;
@@ -62,6 +64,7 @@ static NSURLCredential* clientAuthenticationCredential;
     _automaticallyAdjustContentInsets = YES;
     _contentInset = UIEdgeInsetsZero;
     self.layer2 = [[Layer2 alloc] init];
+    self.realLayer2 = [[RealLayer2 alloc] init];
   }
   return self;
 }
@@ -475,6 +478,26 @@ static NSURLCredential* clientAuthenticationCredential;
   [context evaluateScript:@"log('doFooWithBar:', layer2.doFoo(1111111, 2222222));"];
 }
 
-
+- (void)setRealLayer2:(RealLayer2 *)realLayer2{
+  if (_realLayer2) return;
+  _realLayer2 = realLayer2;
+  class_addProtocol([RealLayer2 class], @protocol(RealLayer2Protocol));
+  
+  JSContext *context = [[JSContext alloc] init];
+  context.exceptionHandler = ^(JSContext *con, JSValue *exception) {
+    NSLog(@"%@", exception);
+    con.exception = exception;
+  };
+  
+  context[@"log"] = ^() {
+    NSArray *args = [JSContext currentArguments];
+    for (id obj in args) {
+      NSLog(@"%@",obj);
+    }
+  };
+  context[@"realLayer2"] = realLayer2;
+  [context evaluateScript:@"log('realNameMethodCalledInJs:', realLayer2.realNameMethodCalledInJs());"];
+  [context evaluateScript:@"log('realDoFoo:', realLayer2.realDoFoo(1111111, 2222222));"];
+}
 
 @end

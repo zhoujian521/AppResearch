@@ -10,6 +10,7 @@
 #import <React/RCTDefines.h>
 #import <WebKit/WebKit.h>
 #import "Layer2.h"
+#import "RealLayer2.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +27,8 @@ shouldStartLoadForRequest:(NSMutableDictionary<NSString *, id> *)request
 @interface RCTZJWebView : RCTView
 
 @property (nonatomic, strong) Layer2 *layer2;
+
+@property (nonatomic, strong) RealLayer2 *realLayer2;
 
 @property (nonatomic, weak) id<RCTZJWebViewDelegate> delegate;
 @property (nonatomic, copy) NSDictionary *source;
