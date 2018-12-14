@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import GethModel from './utils/geth-utils';
 import ZJWebView from './nativeComponent/ZJWebView';
+import WebViewBridge from 'react-native-webview-bridge';
 
 
 
@@ -17,9 +18,9 @@ export default class App extends Component {
 
   componentDidMount=()=>{
     const { webviewbridge } = this.refs;
-    console.log('=============webviewbridge=======================');
-    console.log(webviewbridge);
-    console.log('=============webviewbridge=======================');
+    // console.log('=============webviewbridge=======================');
+    // console.log(webviewbridge);
+    // console.log('=============webviewbridge=======================');
   }
   
   _init =()=>{
@@ -114,31 +115,36 @@ export default class App extends Component {
     //   </TouchableOpacity>
     // </View>
     
-    // const injectScript = 
-    // `(function () {
-    //         if (WebViewBridge) {
-    //           WebViewBridge.onMessage = function (message) {
-    //             if (message === "hello from react-native") {
-    //               WebViewBridge.send("got the message inside webview");
-    //             }
-    //           };
-    //           webviewbridge.send("Android shouldOverrideUrlLoading");
-    //           WebViewBridge.send("hello from webview");
-    //         }
-    //   }());`;
+    const injectScript = 
+    `(function () {
+            if (WebViewBridge) {
+              WebViewBridge.onMessage = function (message) {
+                if (message === "hello from react-native") {
+                  WebViewBridge.send("got the message inside webview");
+                }
+              };
+              webviewbridge.send("Android shouldOverrideUrlLoading");
+              WebViewBridge.send("hello from webview");
+            }
+      }());`;
 
-    //   <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
-    //   ref="webviewbridge"
-    //   source={{uri: "https://google.com"}}
-    //   injectedJavaScript={injectScript}
-    //   onBridgeMessage={this.onBridgeMessage.bind(this)}
-    //   onMessage={this.onBridgeMessage.bind(this)}
-    //   />
+
+      // <WebViewBridge style={{ backgroundColor:'red', flex: 1 }}
+      //   ref="webviewbridge"
+      //   source={{uri: "https://google.com"}}
+      //   injectedJavaScript={injectScript}
+      //   onBridgeMessage={this.onBridgeMessage.bind(this)}
+      //   onMessage={this.onBridgeMessage.bind(this)}/> 
+
+      const webView = <ZJWebView 
+        style={{ backgroundColor:'cyan', flex: 1}} 
+        source={{uri: 'https://google.com'}}
+        />
 
     return (
-      <ZJWebView 
-      styles={{width:100, height:100, backgroundColor:'red'}} 
-      source={{uri: 'https://github.com/facebook/react-native'}}/>
+      <View style={{ backgroundColor:'', flex: 1 }}>
+        {webView}
+      </View>
     );
   }
 

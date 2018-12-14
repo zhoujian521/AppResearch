@@ -10,7 +10,7 @@
 #import <React/RCTDefines.h>
 #import <WebKit/WebKit.h>
 
-//NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 @class RCTZJWebView;
 
@@ -49,4 +49,4 @@ shouldStartLoadForRequest:(NSMutableDictionary<NSString *, id> *)request
 
 @end
 
-//NS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

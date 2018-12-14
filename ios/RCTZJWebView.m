@@ -61,10 +61,6 @@ static NSURLCredential* clientAuthenticationCredential;
     _scrollEnabled = YES;
     _automaticallyAdjustContentInsets = YES;
     _contentInset = UIEdgeInsetsZero;
-    _webView = [[WKWebView alloc] initWithFrame:self.bounds];
-    _webView.UIDelegate = self;
-    _webView.navigationDelegate = self;
-    [self addSubview:_webView];
   }
   return self;
 }
